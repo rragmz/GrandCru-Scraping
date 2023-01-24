@@ -1,8 +1,9 @@
 import config
 from sqlalchemy import create_engine, Column, Integer, String, Float
 from sqlalchemy.ext.declarative import declarative_base
-from wines import WINES
+from wines import scrap
 
+data = scrap()
 
 def pg_connection():
     USERNAME = config.DATABASE_CONFIG["USERNAME_DB"]
@@ -42,7 +43,7 @@ Session = sessionmaker(bind=pg_connection())
 session = Session()
 
 # insert the data
-for i in WINES:
+for i in data:
     session.add(Wine(product_id=i['product_id'], product_link=i['product-link'], product_image=i['product-image'],product_name=i['product_name'], product_price=float(i['product-price']), type_of_wine=i['type-of-wine'], country=i['country'], product_stock=i['product-stock']))
     
 

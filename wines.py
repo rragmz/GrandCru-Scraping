@@ -34,7 +34,7 @@ def wines_fetcher(page = ''):
     return page_source
 
 def wines_parser(page):
-    soup = BeautifulSoup(wines_fetcher(page), 'html.parser')
+    soup = BeautifulSoup(page, 'html.parser')
     items = soup.find_all('div', {'class':'js-item-product'})
     total_items = []
     for item in items:
@@ -80,7 +80,10 @@ def wines_parser(page):
             pass
     return total_items
 
-ARGENTINE_WINES = wines_parser('/vinos-argentinos')
-INTERNATIONAL_WINES = wines_parser('/vinos-del-mundo')
-WINES = ARGENTINE_WINES + INTERNATIONAL_WINES
-#print(WINES)
+def scrap():
+    argentine_fetcher = wines_fetcher(PAGE_NATIONAL_WINES)
+    argentine_wines = wines_parser(argentine_fetcher)
+    international_fetcher = wines_fetcher(PAGE_WINES_WORLD)
+    international_wines = wines_parser(international_fetcher)
+    wines = argentine_wines + international_wines
+    return wines

@@ -1,5 +1,7 @@
 config.py
+__pycache__
 env-postgres.txt
-filter-proxies.py
+filter_proxies.py
 Free_Proxy_List.json
 proxies.py
+geckodriver.log
